@@ -1,4 +1,4 @@
-var scene, camera, renderer, controls, house;
+var scene, camera, renderer, controls, house, pic;
 var drawWidth = window.innerWidth;
 var drawHeight = window.innerHeight;
 
@@ -20,8 +20,20 @@ function init() {
     }
   );
 
+  // Images
+  var imgLoader = new THREE.TextureLoader();
+  var mat = new THREE.MeshLambertMaterial({
+    map: imgLoader.load(
+      "https://cdn.glitch.com/b5469c85-7f52-4fd5-a648-8d70ac85ec20%2Finformation.png?v=1561502478745"
+    )
+  });
+  var geo = new THREE.CircleGeometry(1, 16);
+  pic = new THREE.Mesh(geo, mat);
+  pic.position.set(0, 8, -3);
+  scene.add(pic);
+
   // Lighting
-  var ambLight = new THREE.AmbientLight(0x404040, 1); // soft white light
+  var ambLight = new THREE.AmbientLight(0x404040, 0.3);
   scene.add(ambLight);
 
   var hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 0.8);
@@ -33,7 +45,7 @@ function init() {
   scene.add(dirLight);
 
   // Camera
-  camera.position.set(0, 10, -20);
+  camera.position.set(0, 10, 20);
   camera.lookAt(new THREE.Vector3(0, 3, 0));
   controls.update();
 
