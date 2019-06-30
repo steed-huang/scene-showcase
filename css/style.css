@@ -2,12 +2,15 @@
   position: absolute;
   border-radius: 50%;
   filter: opacity(80%);
-  width: 5vw;
-  height: 5vw;
+  width: 3vw;
+  height: 3vw;
+  left: 49%;
+  top: 17%;
 }
 
 #info:hover {
   filter: opacity(100%);
+  cursor: pointer;
 }
 
 body {

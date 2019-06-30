@@ -6,7 +6,6 @@ function init() {
   scene = new THREE.Scene();
   camera = new THREE.PerspectiveCamera(70, drawWidth / drawHeight, 0.1, 1000);
   renderer = new THREE.WebGLRenderer({ alpha: true });
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
   renderer.setSize(drawWidth, drawHeight);
   document.body.appendChild(renderer.domElement);
 
@@ -33,16 +32,14 @@ function init() {
   scene.add(dirLight);
 
   // Camera
-  camera.position.set(0, 10, 20);
-  camera.lookAt(new THREE.Vector3(0, 3, 0));
-  controls.update();
+  camera.position.set(0, 12, 15);
+  camera.lookAt(new THREE.Vector3(0, -5, -5));
 
   animate();
 }
 
 function animate() {
   requestAnimationFrame(animate);
-  controls.update();
   renderer.render(scene, camera);
 }
 
