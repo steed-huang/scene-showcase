@@ -1,4 +1,6 @@
-var scene, camera, renderer, controls, house;
+var scene, camera, renderer, house, curve;
+var camPosIndex = 0;
+var isMoving = false;
 var drawWidth = window.innerWidth;
 var drawHeight = window.innerHeight;
 
@@ -34,24 +36,60 @@ function init() {
   // Camera
   camera.position.set(0, 12, 15);
   camera.lookAt(new THREE.Vector3(0, -5, -5));
+  logCam();
 
   animate();
 }
 
 function animate() {
   requestAnimationFrame(animate);
+  if (isMoving) {
+    moveCamera();
+  }
   renderer.render(scene, camera);
 }
 
 function windowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
-
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 function moveCamera() {
-  console.log("test");
+  var camPos = curve.getPoint(camPosIndex / 100);
+  var camRot = curve.getTangent(camPosIndex / 100);
+
+  camera.position.x = camPos.x;
+  camera.position.y = camPos.y;
+  camera.position.z = camPos.z;
+
+  camera.rotation.x = camRot.x;
+  camera.rotation.y = camRot.y;
+  camera.rotation.z = camRot.z;
+
+  logCam();
+  camPosIndex++;
+  if (camPosIndex > 95) {
+    isMoving = false;
+  }
+
+  camera.lookAt(curve.getPoint((camPosIndex + 1) / 100));
+}
+
+function setMove() {
+  camPosIndex = 0;
+  changeCurve([new THREE.Vector3(0, 12, 15), new THREE.Vector3(0, 8.6, 11)]);
+
+  isMoving = true;
+}
+
+function changeCurve(points) {
+  curve = new THREE.CatmullRomCurve3(points);
+}
+
+function logCam() {
+  console.log("pos: x:", camera.position.x, " y:", camera.position.y, " z:", camera.position.z);
+  console.log("rot: x:", camera.rotation.x, " y:", camera.rotation.y, " z:", camera.rotation.z);
 }
 
 window.onload = init;
