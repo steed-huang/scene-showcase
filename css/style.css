@@ -1,11 +1,11 @@
 #info {
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   filter: opacity(80%);
-  width: 3vw;
-  height: 3vw;
+  width: 5vh;
+  height: 5vh;
   left: 49%;
-  top: 17%;
+  top: 18%;
 }
 
 #info:hover {
