@@ -1,16 +1,33 @@
-#info {
+#infoButton {
   position: fixed;
   border-radius: 50%;
   filter: opacity(80%);
-  width: 5vh;
-  height: 5vh;
-  left: 49%;
-  top: 18%;
+  width: 3vh;
+  height: 3vh;
+  left: 48.9%;
+  top: 44%;
 }
 
-#info:hover {
+#infoButton:hover {
   filter: opacity(100%);
   cursor: pointer;
+}
+
+#infoTitle {
+  font-size: 7vh;
+  margin: 0;
+}
+
+#infoPopup {
+  position: fixed;
+  border: 5px solid orangered;
+  background-color: #000000;
+  color: white;
+  filter: opacity(95%);
+  width: 40vh;
+  height: 80vh;
+  left: 50%;
+  top: 5%;
 }
 
 body {

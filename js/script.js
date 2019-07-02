@@ -71,20 +71,49 @@ function moveCamera() {
   camPosIndex++;
   if (camPosIndex > 95) {
     isMoving = false;
+    showInfo();
   }
 
   camera.lookAt(curve.getPoint((camPosIndex + 1) / 100));
 }
 
-function setMove() {
+function moveTo() {
+  document.getElementById("infoButton").style.visibility = "hidden";
   camPosIndex = 0;
-  changeCurve([new THREE.Vector3(0, 12, 15), new THREE.Vector3(0, 8.6, 11)]);
-
+  changeCurve([
+    new THREE.Vector3(0, 12, 15),
+    new THREE.Vector3(0, 8.6, 11),
+    new THREE.Vector3(1, 5.2, 6.5),
+    new THREE.Vector3(0.6, 1.8, 2.5)
+  ]);
   isMoving = true;
 }
 
+function moveBack() {}
+
 function changeCurve(points) {
   curve = new THREE.CatmullRomCurve3(points);
+
+  // draws curve
+  /*
+  let p = curve.getPoints(50);
+  let geometry = new THREE.BufferGeometry().setFromPoints(p);
+  let material = new THREE.LineBasicMaterial({ color: 0xff0000 });
+  let curveObject = new THREE.Line(geometry, material);
+  scene.add(curveObject);
+  */
+}
+
+function showInfo() {
+  let popup = document.createElement("div");
+  let popTitle = document.createElement("h1");
+  popup.setAttribute("id", "infoPopup");
+  popTitle.setAttribute("id", "infoTitle");
+  popTitle.innerHTML = "Mailbox";
+  popup.appendChild(popTitle);
+  document.body.appendChild(popup);
+  popup.innerHTML +=
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse hendrerit, velit ac vulputate cursus, libero ex vulputate turpis, sit amet condimentum ante tellus nec mi. Vestibulum rhoncus ligula justo, ac gravida magna pretium ut. Curabitur facilisis diam nisi, id laoreet justo congue porta. Aenean iaculis neque vitae bibendum congue. Mauris placerat erat nunc, at tempus ante egestas vitae. Donec feugiat nunc sit amet est elementum pellentesque. Mauris nec condimentum orci. Curabitur feugiat neque et justo tempus interdum. Nulla posuere euismod lorem vitae interdum. Mauris at auctor diam. In at varius nulla. Donec metus lectus, dignissim vitae odio et, congue gravida est. Ut luctus lorem quis orci scelerisque, sed vehicula augue ullamcorper.";
 }
 
 function logCam() {
